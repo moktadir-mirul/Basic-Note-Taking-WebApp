@@ -25,9 +25,7 @@ function App() {
           notes = {notes}
           setNotes = {setNotes}
           setNoteTitle = {setNoteTitle}
-          editMode = {editMode}
           setEditMode = {setEditMode}
-          editableNote = {editableNote}
           setEditableNote = {setEditableNote}
           />
       </div>

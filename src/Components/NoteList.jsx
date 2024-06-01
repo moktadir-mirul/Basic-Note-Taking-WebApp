@@ -1,6 +1,6 @@
 function NoteList(props) {
 
-    const {editMode, setEditMode, editableNote, setEditableNote, setNoteTitle, notes, setNotes} = props;
+    const { setEditMode, setEditableNote, setNoteTitle, notes, setNotes} = props;
 
         const editHandler = (note) => {
             setEditMode(true);
