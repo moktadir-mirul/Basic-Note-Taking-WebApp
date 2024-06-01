@@ -4,10 +4,7 @@ import './App.css'
 
 function App() {
       const [noteTitle, setNoteTitle] = useState('');
-      const [notes, setNotes] = useState([
-        // {id: Date.now()+'', title: "note3"},
-        // {id: Date.now()+'', title: "Note2"}
-      ]);
+      const [notes, setNotes] = useState([]);
       const [editMode, setEditMode] = useState(false);
       const [editableNote, setEditableNote] = useState(null);
 
