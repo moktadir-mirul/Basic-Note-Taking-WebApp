@@ -1,6 +1,6 @@
 function NoteList(props) {
 
-    const { setEditMode, setEditableNote, setNoteTitle, notes, setNotes, AllNotes} = props;
+    const { setEditMode, setEditableNote, setNoteTitle, notes, AllNotes} = props;
 
         const editHandler = (note) => {
             setEditMode(true);
@@ -14,8 +14,6 @@ function NoteList(props) {
             .then(() => {
                 AllNotes()
             })
-            // const updatedArr = notes.filter((note) => note.id !== noteId)
-            // setNotes(updatedArr)
         }
 
         return (

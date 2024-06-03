@@ -34,7 +34,6 @@ function App() {
           />
           <NoteList
           notes = {notes}
-          setNotes = {setNotes}
           setNoteTitle = {setNoteTitle}
           setEditMode = {setEditMode}
           setEditableNote = {setEditableNote}
