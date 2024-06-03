@@ -1,7 +1,7 @@
 
 function NoteForm(props) {
 
-  const { noteTitle, setNoteTitle, notes, setNotes, editMode, setEditMode, editableNote, setEditableNote, AllNotes } = props;
+  const { noteTitle, setNoteTitle, editMode, setEditMode, editableNote, setEditableNote, AllNotes } = props;
 
     const inputHandler = (input) => {
         setNoteTitle(input.target.value)
@@ -20,20 +20,10 @@ function NoteForm(props) {
               .then(() => {
                 AllNotes()           
               })
-          // setNotes([...notes, newNote]);
           setNoteTitle('');
       }
 
       const updateHandler = () => {
-        // const updatedNoteArr = notes.map((note) => {
-        //   if(note.id === editableNote.id) {
-        //     return {
-        //             ...note,
-        //             title: noteTitle
-        //           }
-        //   }
-        //     return note
-        // })
         fetch(`http://localhost:3000/notes/${editableNote.id}`, 
           {method: "PATCH",
           body: JSON.stringify({title: noteTitle}),
@@ -43,12 +33,11 @@ function NoteForm(props) {
         .then(() => {
           AllNotes()
         })
-        // setNotes(updatedNoteArr);
         setEditMode(false);
         setNoteTitle('');
         setEditableNote(null);
       }
-
+      
       const submitHandler = (event) => {
         event.preventDefault();
         if (noteTitle.trim() === '') return alert('Please enter a note name');
