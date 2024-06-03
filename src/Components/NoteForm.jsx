@@ -1,7 +1,7 @@
 
 function NoteForm(props) {
 
-  const { noteTitle, setNoteTitle, notes, setNotes, editMode, setEditMode, editableNote, setEditableNote } = props;
+  const { noteTitle, setNoteTitle, notes, setNotes, editMode, setEditMode, editableNote, setEditableNote, AllNotes } = props;
 
     const inputHandler = (input) => {
         setNoteTitle(input.target.value)
@@ -12,21 +12,38 @@ function NoteForm(props) {
                                       id: Date.now()+'',
                                       title: noteTitle
                                     }
-          setNotes([...notes, newNote]);
+              fetch('http://localhost:3000/notes', 
+              { method: "POST",
+                body: JSON.stringify(newNote),
+                headers: {'content-type': 'application/json'}
+              })
+              .then(() => {
+                AllNotes()           
+              })
+          // setNotes([...notes, newNote]);
           setNoteTitle('');
       }
 
       const updateHandler = () => {
-        const updatedNoteArr = notes.map((note) => {
-          if(note.id === editableNote.id) {
-            return {
-                    ...note,
-                    title: noteTitle
-                  }
-          }
-            return note
+        // const updatedNoteArr = notes.map((note) => {
+        //   if(note.id === editableNote.id) {
+        //     return {
+        //             ...note,
+        //             title: noteTitle
+        //           }
+        //   }
+        //     return note
+        // })
+        fetch(`http://localhost:3000/notes/${editableNote.id}`, 
+          {method: "PATCH",
+          body: JSON.stringify({title: noteTitle}),
+          headers: {'content-type': 'application/json'},
         })
-        setNotes(updatedNoteArr);
+        .then(res => res.json())
+        .then(() => {
+          AllNotes()
+        })
+        // setNotes(updatedNoteArr);
         setEditMode(false);
         setNoteTitle('');
         setEditableNote(null);

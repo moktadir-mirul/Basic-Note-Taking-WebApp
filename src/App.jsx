@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import NoteForm from './Components/NoteForm';
 import NoteList from './Components/NoteList';
@@ -9,24 +9,35 @@ function App() {
       const [editMode, setEditMode] = useState(false);
       const [editableNote, setEditableNote] = useState(null);
 
+    const AllNotes = () => {
+        fetch('http://localhost:3000/notes')
+        .then(res => res.json())
+        .then((data) => {
+            setNotes(data)
+        })
+    }
+
+    useEffect(() => {
+        AllNotes()
+    }, [])
+
   return (
       <div className="mainArea">
           <NoteForm
           noteTitle = {noteTitle} 
           setNoteTitle = {setNoteTitle}
-          notes = {notes}
-          setNotes = {setNotes}
           editMode = {editMode}
           setEditMode = {setEditMode}
           editableNote = {editableNote}
           setEditableNote = {setEditableNote}
+          AllNotes = {AllNotes}
           />
           <NoteList
           notes = {notes}
-          setNotes = {setNotes}
           setNoteTitle = {setNoteTitle}
           setEditMode = {setEditMode}
           setEditableNote = {setEditableNote}
+          AllNotes = {AllNotes}
           />
       </div>
   )

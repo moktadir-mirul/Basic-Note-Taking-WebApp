@@ -1,6 +1,6 @@
 function NoteList(props) {
 
-    const { setEditMode, setEditableNote, setNoteTitle, notes, setNotes} = props;
+    const { setEditMode, setEditableNote, setNoteTitle, notes, AllNotes} = props;
 
         const editHandler = (note) => {
             setEditMode(true);
@@ -8,8 +8,12 @@ function NoteList(props) {
             setEditableNote(note)
         }
         const removeHandler = (noteId) => {
-            const updatedArr = notes.filter((note) => note.id !== noteId)
-            setNotes(updatedArr)
+            fetch(`http://localhost:3000/notes/${noteId}`, 
+                {method: 'DELETE'}
+            )
+            .then(() => {
+                AllNotes()
+            })
         }
 
         return (
