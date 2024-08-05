@@ -3,6 +3,7 @@ import './App.css'
 import NoteForm from './Components/NoteForm';
 import NoteList from './Components/NoteList';
 
+
 function App() {
       const [noteTitle, setNoteTitle] = useState('');
       const [notes, setNotes] = useState([]);
@@ -20,6 +21,9 @@ function App() {
     useEffect(() => {
         AllNotes()
     }, [])
+
+
+
 
   return (
       <div className="mainArea">
