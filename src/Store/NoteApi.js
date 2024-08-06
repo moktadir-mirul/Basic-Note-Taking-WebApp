@@ -29,6 +29,18 @@ export const NoteApi = createApi({
                     invalidatesTags: ["notes"]
                 }
             ),
+            editNote: builder.mutation(
+                {
+                    query: ({id, ...restNote}) => (
+                      {
+                        url: `notes/${id}`,
+                        method: "PATCH",
+                        body: restNote,
+                      }  
+                    ),
+                    invalidatesTags: ["notes"]
+                }
+            ),
             removeNote: builder.mutation(
                 {
                     query: (ID) => (
@@ -46,5 +58,6 @@ export const NoteApi = createApi({
 
 
 export const {  useGetAllNotesQuery, 
-                useCreateNoteMutation, 
+                useCreateNoteMutation,
+                useEditNoteMutation, 
                 useRemoveNoteMutation} = NoteApi;
