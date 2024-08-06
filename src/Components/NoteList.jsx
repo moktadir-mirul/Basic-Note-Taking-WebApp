@@ -1,20 +1,26 @@
+import { useGetAllNotesQuery, useRemoveNoteMutation } from "../Store/NoteApi";
+
 function NoteList(props) {
 
-    const { setEditMode, setEditableNote, setNoteTitle, notes, AllNotes} = props;
+    const {isFetching, isError, error, data: notes } = useGetAllNotesQuery();
+
+    const [removeNote] = useRemoveNoteMutation();
+
+    const { setNote, setEditMode, setEditableNote} = props;
 
         const editHandler = (note) => {
+            console.log(note, "=Note")
             setEditMode(true);
-            setNoteTitle(note.title);
-            setEditableNote(note)
+            setNote(note);
+            setEditableNote(note.id);
         }
-        const removeHandler = (noteId) => {
-            fetch(`http://localhost:3000/notes/${noteId}`, 
-                {method: 'DELETE'}
-            )
-            .then(() => {
-                AllNotes()
-            })
-        }
+
+    if (isFetching) {
+        return <h2>Data is Loading......</h2>
+    }
+    if (isError) {
+        return <h2>{error.message}</h2>
+    }
 
         return (
             <div className="NoteListDiv">
@@ -24,7 +30,7 @@ function NoteList(props) {
                             <li className="lists" key={note.id}>
                                 <span>{note.title}</span>
                                 <button className="btnAll btnInput" onClick={() => editHandler(note)}>Edit</button>
-                                <button className="btnAll" onClick={() => removeHandler(note.id)}>Delete</button>
+                                <button className="btnAll" onClick={() => removeNote(note.id)}>Delete</button>
                             </li>
                         ))}
                     </ul>
