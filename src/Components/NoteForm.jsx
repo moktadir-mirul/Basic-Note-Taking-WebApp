@@ -12,7 +12,6 @@ function NoteForm(props) {
         setNote({...note, [input.target.name] : input.target.value})
       }
 
-
     const createHandler = () => {
         createNote(note);
         setNote({title: ''});
