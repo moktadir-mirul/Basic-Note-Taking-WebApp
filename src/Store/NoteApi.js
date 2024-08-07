@@ -31,11 +31,11 @@ export const NoteApi = createApi({
             ),
             editNote: builder.mutation(
                 {
-                    query: ({id, ...restNote}) => (
+                    query: (note) => (
                       {
-                        url: `notes/${id}`,
+                        url: `notes/${note.id}`,
                         method: "PATCH",
-                        body: restNote,
+                        body: note,
                       }  
                     ),
                     invalidatesTags: ["notes"]

@@ -29,7 +29,6 @@ function NoteForm(props) {
       event.preventDefault();
       if(note.title.trim() === '') return alert('Please enter a note name');
       editMode ===  true ? updateHandler(note) : createHandler();
-      console.log(note, "update")
     }
 
     return (
